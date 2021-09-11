@@ -27,6 +27,8 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+
+
 }
 
 class _ExampleMask {
@@ -38,16 +40,44 @@ class _ExampleMask {
   _ExampleMask({@required this.formatter, this.validator, @required this.hint});
 }
 
-class MyCustomForm extends StatelessWidget {
+class MyCustomForm extends StatefulWidget {
+
   const MyCustomForm({Key key}) : super(key: key);
 
   @override
+  _MyCustomFormState createState() => _MyCustomFormState();
+}
+class _MyCustomFormState extends State<MyCustomForm>{
+  bool _isButtonDisabled;
+  var _onPressed;
+  var textEditingController = TextEditingController();
+
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    textEditingController.addListener(() {
+      if (textEditingController.text.length == 18) {
+        setState(() {
+          LengthLimitingTextInputFormatter(18);
+        });
+      }
+    });
+  }
+
+
+
+  @override
   Widget build(BuildContext context) {
-    var textEditingController = TextEditingController();
+
+    @override
     var maskFormatter = new MaskTextInputFormatter(
       mask: "+7 (###) ###-##-##",
       filter: {"#": RegExp(r'[0-9]')},
     );
+
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,11 +85,12 @@ class MyCustomForm extends StatelessWidget {
           Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(top:0, left: 72, right: 72),
-            child: Text(
-              'Введите ваш номер телефона',
-              style: new TextStyle(
-                fontSize: 18.0,
-                color: Colors.black,
+            child: FittedBox(
+              fit: BoxFit.cover,
+              child:
+              Text(
+                'Введите ваш номер телефона',
+                style: TextStyle(fontSize: 18,color: Colors.black),
               ),
             ),
           ),
@@ -69,7 +100,7 @@ class MyCustomForm extends StatelessWidget {
               controller: textEditingController,
               inputFormatters: [
                 maskFormatter,
-                LengthLimitingTextInputFormatter(21),
+                LengthLimitingTextInputFormatter(18),
               ],
               keyboardType: TextInputType.phone,
               autovalidateMode: AutovalidateMode.always,
@@ -86,20 +117,23 @@ class MyCustomForm extends StatelessWidget {
               alignment: Alignment.center,
               margin: const EdgeInsets.only( bottom: 56,left: 16,right: 16),
               child:
-                MaterialButton(
-                  child: Text(
-                    "Получить код",
-                    style: new TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.white,
-                    ),
+              MaterialButton(
+                disabledColor: Colors.grey,
+                child: Text(
+                  "Получить код",
+                  style: new TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.white70,
+
                   ),
-                  onPressed: () {},
-                  height: 52,
-                  minWidth: double.infinity,
-                  color: Colors.grey,
-                )
+                ),
+                onPressed: textEditingController.text.length ==18? (){
+                } : null,
+                height: 52,
+                minWidth: double.infinity,
+                color: Colors.black,
               ),
+          ),
           Container(
             margin: const EdgeInsets.only( left: 16, right: 16),
             child: Row(
@@ -114,11 +148,6 @@ class MyCustomForm extends StatelessWidget {
           ),
         ]);
   }
-
-  @override
-  Widget text(BuildContext context) {
-    return Column(
-      children: <Widget>[],
-    );
-  }
 }
+
+
