@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '';
@@ -18,22 +19,15 @@ class MyApp extends StatelessWidget {
       title: appTitle,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(appTitle,
-              style: TextStyle(
-                  color: Colors.black
-              )
-          ),
-          backgroundColor:Colors.white,
+          title: const Text(appTitle, style: TextStyle(color: Colors.black)),
+          backgroundColor: Colors.white,
           centerTitle: true,
         ),
         body: const MyCustomForm(),
       ),
     );
   }
-
-
 }
-
 
 class _ExampleMask {
   final TextEditingController textController = TextEditingController();
@@ -45,33 +39,28 @@ class _ExampleMask {
 }
 
 class MyCustomForm extends StatefulWidget {
-
   const MyCustomForm({Key key}) : super(key: key);
 
   @override
   _MyCustomFormState createState() => _MyCustomFormState();
 }
-class _MyCustomFormState extends State<MyCustomForm>{
+
+class _MyCustomFormState extends State<MyCustomForm> {
   bool _isButtonDisabled;
   var _onPressed;
 
   var textEditingController = TextEditingController();
 
-
   @override
   void initState() {
     super.initState();
 
-textEditingController.addListener(() {
-  if (textEditingController.text.length == 18) {
-    setState(() {
-
-    });}
-});
-
+    textEditingController.addListener(() {
+      if (textEditingController.text.length == 18) {
+        setState(() {});
+      }
+    });
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -116,27 +105,34 @@ textEditingController.addListener(() {
             ),
           ),
           Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.only(bottom: 56, left: 16, right: 16),
-            child: MaterialButton(
-              disabledColor: Colors.grey,
-              child: Text(
-                "Получить код",
-                style: new TextStyle(
-                  fontSize: 18.0,
-                  color: Colors.white70,
-                ),
-              ),
-              onPressed: textEditingController.text.length == 18 ? () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen())
-                );} : null,
-              height: 52,
-              minWidth: double.infinity,
-              color: Colors.black,
-            ),
-          ),
+              alignment: Alignment.center,
+              margin: const EdgeInsets.only(bottom: 56, left: 16, right: 16),
+              child: Column(
+                children: [
+                  MaterialButton(
+                    disabledColor: Colors.grey,
+                    child: Text(
+                      "Получить код",
+                      style: new TextStyle(
+                        fontSize: 18.0,
+                        color: Colors.white70,
+                      ),
+                    ),
+                    onPressed: textEditingController.text.length == 18
+                        ? () {
+
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomeScreen()));
+                          }
+                        : null,
+                    height: 52,
+                    minWidth: double.infinity,
+                    color: Colors.black,
+                  ),
+                ],
+              )),
           Container(
             margin: const EdgeInsets.only(left: 16, right: 16),
             child: Row(
@@ -152,5 +148,3 @@ textEditingController.addListener(() {
         ]);
   }
 }
-
-
