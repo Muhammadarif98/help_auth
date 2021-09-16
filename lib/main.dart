@@ -47,9 +47,9 @@ class MyCustomForm extends StatefulWidget {
 
 class _MyCustomFormState extends State<MyCustomForm> {
   bool _isButtonDisabled;
-  var _onPressed;
 
-  var textEditingController = TextEditingController();
+
+  final textEditingController = TextEditingController();
 
   @override
   void initState() {
@@ -65,6 +65,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
   @override
   Widget build(BuildContext context) {
     @override
+
     var maskFormatter = new MaskTextInputFormatter(
       mask: "+7 (###) ###-##-##",
       filter: {"#": RegExp(r'[0-9]')},
@@ -124,7 +125,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()));
+                                    builder: (context) =>  HomeScreen(value : textEditingController.text )));
                           }
                         : null,
                     height: 52,

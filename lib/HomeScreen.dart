@@ -3,37 +3,41 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:help_auth/CallScreen.dart';
 import 'package:pin_entry_text_field/pin_entry_text_field.dart';
+import 'main.dart';
 
-void main() => runApp(const HomeScreen());
+void main() => runApp(HomeScreen());
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  final String value;
+
+  HomeScreen({Key key, this.value}) : super(key: key);
+
+  @override
+  _MyFormState createState() => _MyFormState();
+
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Авторизация';
-    return Scaffold(
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black, //change your color here
-        ),
-        title: const Text(appTitle, style: TextStyle(color: Colors.black)),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-      ),
-      body: const MyForm(),
+      return Scaffold(
+      body: HomeScreen(),
     );
   }
 }
 
 class MyForm extends StatefulWidget {
-  const MyForm({Key key}) : super(key: key);
+  MyForm({
+    Key key,
+  }) : super(key: key);
 
   @override
   _MyFormState createState() => _MyFormState();
 }
 
-class _MyFormState extends State<MyForm> {
+class _MyFormState extends State<HomeScreen> {
+  String value;
+
+  _MyFormState({Key key, @required this.value});
+
   Timer _timer;
   int _start = 60;
 
@@ -70,11 +74,20 @@ class _MyFormState extends State<MyForm> {
   @override
   Widget build(BuildContext context) {
     var code = '1234';
-
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
+    const appTitle = 'Авторизация';
+    return new Scaffold(
+        appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Colors.black, //change your color here
+          ),
+          title: const Text(appTitle, style: TextStyle(color: Colors.black)),
+          backgroundColor: Colors.white,
+          centerTitle: true,
+        ),
+        body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
           Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(top: 0, bottom: 16),
@@ -105,14 +118,20 @@ class _MyFormState extends State<MyForm> {
                 children: [
                   Container(
                     child: Text(
-                      '+7(963) 459 - 54 - 43',
+                      "${widget.value}",
                       style: TextStyle(fontSize: 14, color: Colors.blueAccent),
                     ),
                   ),
                   Container(
-                    child: Text(
-                      '(изменить)',
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    child: new GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        ' (изменить)',
+                        style: TextStyle(fontSize: 14, color: Colors.grey),
+
+                      ),
                     ),
                   ),
                 ]),
@@ -170,6 +189,6 @@ class _MyFormState extends State<MyForm> {
               ),
             ),
           ),
-        ]);
+        ]));
   }
 }
