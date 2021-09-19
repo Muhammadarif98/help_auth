@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '';
@@ -46,26 +45,30 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class _MyCustomFormState extends State<MyCustomForm> {
-  bool _isButtonDisabled;
+  bool isButtonEnabled;
 
 
   final textEditingController = TextEditingController();
 
+
+
   @override
   void initState() {
     super.initState();
-
-    textEditingController.addListener(() {
-      if (textEditingController.text.length == 18) {
-        setState(() {});
-      }
-    });
+    // textEditingController.addListener(() {
+    //   if (textEditingController.text.length == 18) {
+    //     setState(() {
+    //       }
+    //     );
+    //   }else if(textEditingController.text.length > 18) {
+    //
+    //   }
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
     @override
-
     var maskFormatter = new MaskTextInputFormatter(
       mask: "+7 (###) ###-##-##",
       filter: {"#": RegExp(r'[0-9]')},
@@ -90,6 +93,17 @@ class _MyCustomFormState extends State<MyCustomForm> {
             margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
             child: TextFormField(
               autovalidate: true,
+              // ignore: missing_return
+              validator: (String txt){
+                bool isValid = txt.length == 18;
+                if (isValid != isButtonEnabled) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    setState(() {
+                      isButtonEnabled = txt.length == 18;
+                    });
+                  });
+                }
+              },
               controller: textEditingController,
               inputFormatters: [
                 maskFormatter,
@@ -119,14 +133,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
                         color: Colors.white70,
                       ),
                     ),
-                    onPressed: textEditingController.text.length == 18
-                        ? () {
-
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>  HomeScreen(value : textEditingController.text )));
-                          }
+                    onPressed: textEditingController.text.length == 18 ? () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  HomeScreen(
+                                      value: textEditingController.text)));
+                    }
                         : null,
                     height: 52,
                     minWidth: double.infinity,

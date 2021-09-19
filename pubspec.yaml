@@ -56,6 +56,12 @@ flutter:
    - assets/google.svg
    - assets/vk.svg
    - assets/specialist.svg
+   - assets/video.svg
+   - assets/call.svg
+   - assets/sos.svg
+   - assets/help.svg
+   - assets/phone.svg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
