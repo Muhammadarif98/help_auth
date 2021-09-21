@@ -61,6 +61,10 @@ flutter:
    - assets/sos.svg
    - assets/help.svg
    - assets/phone.svg
+   - assets/userbn.png
+   - assets/usersbn.png
+   - assets/homebn.png
+   - assets/filetextbn.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

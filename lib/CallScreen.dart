@@ -26,22 +26,22 @@ class CallForm extends StatefulWidget {
 class _CallState extends State<CallForm> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
-  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Index 0: Home',
+      'Index 0: Главная',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Index 1: Специалисты',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Index 2: Обращения',
       style: optionStyle,
     ),
     Text(
-      'Index 3: Settings',
+      'Index 3: Профиль',
       style: optionStyle,
     ),
   ];
@@ -146,30 +146,36 @@ class _CallState extends State<CallForm> {
           ),
         ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.red,
+            icon: ImageIcon(
+              AssetImage('assets/homebn.png'),
+            ),
+            label: 'Главная',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
-            backgroundColor: Colors.blue,
+            icon: ImageIcon(
+                AssetImage('assets/usersbn.png'),
+            ),
+            label: 'Специалисты',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
-            backgroundColor: Colors.green,
+            icon: ImageIcon(
+                AssetImage('assets/filetextbn.png'),
+            ),
+            label: 'Обращения',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-            backgroundColor: Colors.pink,
+            icon: ImageIcon(
+                AssetImage('assets/userbn.png'),
+            ),
+            label: 'Профиль',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.grey[300],
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.grey[400],
         onTap: _onItemTapped,
       ),);
   }
