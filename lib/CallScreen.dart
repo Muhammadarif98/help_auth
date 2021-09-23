@@ -6,7 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 void main() => runApp(const CallScreen());
 
 class CallScreen extends StatelessWidget {
-  const CallScreen({Key key}) : super(key: key);
+  const CallScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class CallScreen extends StatelessWidget {
 }
 
 class CallForm extends StatefulWidget {
-  const CallForm({Key key}) : super(key: key);
+  const CallForm({Key? key}) : super(key: key);
 
   @override
   _CallState createState() => _CallState();
@@ -75,7 +75,7 @@ class _CallState extends State<CallForm> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(4)),
-                        border: Border.all(color: Colors.grey[200])),
+                        border: Border.all(color: Colors.grey)),
                     margin: const EdgeInsets.only(
                         top: 40, bottom: 16, right: 16, left: 16),
                     child: Center(
@@ -99,7 +99,7 @@ class _CallState extends State<CallForm> {
                     height: 155,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(4)),
-                        border: Border.all(color: Colors.grey[200])),
+                        border: Border.all(color: Colors.grey)),
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(
                         top: 0, bottom: 24, right: 16, left: 16),
@@ -124,7 +124,7 @@ class _CallState extends State<CallForm> {
                     height: 87,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(4)),
-                        border: Border.all(color: Colors.grey[200])),
+                        border: Border.all(color: Colors.grey)),
                     alignment: Alignment.center,
                     margin: const EdgeInsets.only(
                         top: 0, bottom: 16, right: 16, left: 16),

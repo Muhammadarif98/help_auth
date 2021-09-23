@@ -2,43 +2,43 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:help_auth/CallScreen.dart';
-import 'package:pin_entry_text_field/pin_entry_text_field.dart';
+// import 'package:pin_entry_text_field/pin_entry_text_field.dart';
 import 'main.dart';
 
-void main() => runApp(HomeScreen());
+void main() => runApp(HomeScreen(value: '',));
 
 class HomeScreen extends StatefulWidget {
   final String value;
 
-  HomeScreen({Key key, this.value}) : super(key: key);
+  HomeScreen({Key? key, required this.value}) : super(key: key);
 
   @override
-  _MyFormState createState() => _MyFormState();
+  _MyFormState createState() => _MyFormState(value: '');
 
 
   @override
   Widget build(BuildContext context) {
       return Scaffold(
-      body: HomeScreen(),
+      body: HomeScreen(value: '',),
     );
   }
 }
 
 class MyForm extends StatefulWidget {
   MyForm({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
-  _MyFormState createState() => _MyFormState();
+  _MyFormState createState() => _MyFormState(value: '');
 }
 
 class _MyFormState extends State<HomeScreen> {
   String value;
 
-  _MyFormState({Key key, @required this.value});
+  _MyFormState({Key? key, required this.value});
 
-  Timer _timer;
+ late Timer _timer;
   int _start = 60;
 
   void startTimer() {
@@ -136,37 +136,37 @@ class _MyFormState extends State<HomeScreen> {
                   ),
                 ]),
           ),
-          PinEntryTextField(
-            onSubmit: (String pin) {
-              showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Код смс"),
-                      content: Text('правильный код 1234'),
-                      actions: <Widget>[
-                        FlatButton(
-                            child: Text('Отмена'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            }),
-                        FlatButton(
-                          child: Text('Далее'),
-                          onPressed: '$pin'.toString() == code
-                              ? () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const CallScreen()));
-                                }
-                              : null,
-                        )
-                      ],
-                    );
-                  }); //end showDialog()
-            }, // end onSubmit
-          ),
+          // PinEntryTextField(
+          //   onSubmit: (String pin) {
+          //     showDialog(
+          //         context: context,
+          //         builder: (context) {
+          //           return AlertDialog(
+          //             title: Text("Код смс"),
+          //             content: Text('правильный код 1234'),
+          //             actions: <Widget>[
+          //               FlatButton(
+          //                   child: Text('Отмена'),
+          //                   onPressed: () {
+          //                     Navigator.of(context).pop();
+          //                   }),
+          //               FlatButton(
+          //                 child: Text('Далее'),
+          //                 onPressed: '$pin'.toString() == code
+          //                     ? () {
+          //                         Navigator.push(
+          //                             context,
+          //                             MaterialPageRoute(
+          //                                 builder: (context) =>
+          //                                     const CallScreen()));
+          //                       }
+          //                     : null,
+          //               )
+          //             ],
+          //           );
+          //         }); //end showDialog()
+          //   }, // end onSubmit
+          // ),
           Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(top: 32, bottom: 0),

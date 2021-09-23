@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:help_auth/components/phone_field/phone_field.dart';
 import '';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -9,7 +10,7 @@ import 'HomeScreen.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +35,18 @@ class _ExampleMask {
   final FormFieldValidator<String> validator;
   final String hint;
 
-  _ExampleMask({@required this.formatter, this.validator, @required this.hint});
+  _ExampleMask({required this.formatter, required this.validator, required this.hint});
 }
 
 class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({Key key}) : super(key: key);
+  const MyCustomForm({Key? key}) : super(key: key);
 
   @override
   _MyCustomFormState createState() => _MyCustomFormState();
 }
 
 class _MyCustomFormState extends State<MyCustomForm> {
-  bool isButtonEnabled;
+  late bool isButtonEnabled;
 
 
   final textEditingController = TextEditingController();
@@ -91,33 +92,36 @@ class _MyCustomFormState extends State<MyCustomForm> {
           ),
           Container(
             margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-            child: TextFormField(
-              autovalidate: true,
-              // ignore: missing_return
-              validator: (String txt){
-                bool isValid = txt.length == 18;
-                if (isValid != isButtonEnabled) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    setState(() {
-                      isButtonEnabled = txt.length == 18;
-                    });
-                  });
-                }
-              },
-              controller: textEditingController,
-              inputFormatters: [
-                maskFormatter,
-                LengthLimitingTextInputFormatter(18),
-              ],
-              keyboardType: TextInputType.phone,
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                hintStyle: const TextStyle(color: Colors.grey),
-                focusedBorder: const UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.black)),
-                labelText: '',
-              ),
-            ),
+             child:PhoneFieldModule(controller: textEditingController),
+            // TextFormField(
+            //   autovalidate: true,
+            //
+            //   // validator: (String value){
+            //   //   bool isValid = value.length == 18;
+            //   //   if (isValid != isButtonEnabled) {
+            //   //     WidgetsBinding.instance.addPostFrameCallback((_) {
+            //   //       setState(() {
+            //   //         isButtonEnabled = value.length == 18;
+            //   //       });
+            //   //     });
+            //   //   }
+            //   // },
+            //   controller: textEditingController,
+            //
+            //   maxLengthEnforced: true,
+            //   inputFormatters: [
+            //     maskFormatter,
+            //   ],
+            //   keyboardType: TextInputType.phone,
+            //   decoration: const InputDecoration(
+            //     border: UnderlineInputBorder(),
+            //     hintStyle: const TextStyle(color: Colors.grey),
+            //     focusedBorder: const UnderlineInputBorder(
+            //         borderSide: BorderSide(color: Colors.black)),
+            //     labelText: '',
+            //   ),
+            // ),
+
           ),
           Container(
               alignment: Alignment.center,
@@ -134,6 +138,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
                       ),
                     ),
                     onPressed: textEditingController.text.length == 18 ? () {
+                      setState(() {
+
+                      });
                       Navigator.push(
                           context,
                           MaterialPageRoute(
