@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class PhoneNumber {
   String countryISOCode;
   String countryCode;
@@ -11,7 +9,5 @@ class PhoneNumber {
     required this.number,
   });
 
-  String get completeNumber {
-    return countryCode! + number!;
-  }
+  String get completeNumber => countryCode + number;
 }
