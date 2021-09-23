@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'DialogCard.dart';
+import '../dialog_card.dart';
 import 'data/countries.dart';
 
 class PhoneFieldModule extends StatefulWidget {
@@ -28,12 +28,15 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
   late List<Map<String, dynamic>> _countryList;
   late Map<String, dynamic> _selectedCountry;
 
-
-  late FormFieldValidator<String> validator;
+  final InputDecoration _decoration = InputDecoration(
+    isCollapsed: true,
+    border: InputBorder.none,
+    counterText: '',
+    hintText: 'Type your phone number',
+  );
 
   void setCountry(int index) {
     setState(() => _selectedCountry = _countryList[index]);
-    //controller.dealCode = _selectedCountry["dial_code"].toString();
     Navigator.pop(context);
   }
 
@@ -41,11 +44,9 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
   void initState() {
     _countryList = countries;
     _selectedCountry = _countryList.firstWhere(
-          (item) => item['code'] == (widget.initialCountryCode ?? 'US'),
+      (item) => item['code'] == (widget.initialCountryCode ?? 'US'),
       orElse: () => _countryList.first,
     );
-    validator = widget.validator!;
-    //controller.dealCode = _selectedCountry["dial_code"].toString();
     super.initState();
   }
 
@@ -90,16 +91,12 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
           children: [
             Icon(
               Icons.keyboard_arrow_down_rounded,
-              //color: themeData(context).primaryColor,
             ),
             FittedBox(
               child: Text(
                 '+${_selectedCountry['dial_code']}',
-              //  style: bodyTextStyle1.copyWith(
-               //   color: themeData(context).primaryColor,
-                ),
               ),
-            //),
+            ),
           ],
         ),
       ),
@@ -121,8 +118,7 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
         maxLength: _selectedCountry['max_length'],
         keyboardType: widget.keyboardType,
         controller: widget.controller,
-        validator: widget.validator,
-        decoration: widget.decoration,
+        decoration: widget.decoration ?? _decoration,
       ),
     );
   }
@@ -179,4 +175,3 @@ class _PickerDialog extends StatelessWidget {
     );
   }
 }
-

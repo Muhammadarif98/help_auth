@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:help_auth/components/phone_field/phone_field.dart';
-import '';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import 'HomeScreen.dart';
+import 'global/components/phone_field/phone_field.dart';
+import 'screens/home_screen.dart';
+import 'global/constants.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,12 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Авторизация';
     return MaterialApp(
-      title: appTitle,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text(appTitle, style: TextStyle(color: Colors.black)),
+          title: const Text(appName, style: TextStyle(color: Colors.black)),
           backgroundColor: Colors.white,
           centerTitle: true,
         ),
@@ -27,15 +24,6 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-}
-
-class _ExampleMask {
-  final TextEditingController textController = TextEditingController();
-  final MaskTextInputFormatter formatter;
-  final FormFieldValidator<String> validator;
-  final String hint;
-
-  _ExampleMask({required this.formatter, required this.validator, required this.hint});
 }
 
 class MyCustomForm extends StatefulWidget {
@@ -46,12 +34,18 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class _MyCustomFormState extends State<MyCustomForm> {
-  late bool isButtonEnabled;
-
+  bool isButtonEnabled = false;
 
   final textEditingController = TextEditingController();
 
-
+  void _routeToHomeScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomeScreen(value: textEditingController.text),
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -69,104 +63,58 @@ class _MyCustomFormState extends State<MyCustomForm> {
 
   @override
   Widget build(BuildContext context) {
-    @override
-    var maskFormatter = new MaskTextInputFormatter(
-      mask: "+7 (###) ###-##-##",
-      filter: {"#": RegExp(r'[0-9]')},
-    );
-
     return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.only(top: 0, left: 72, right: 72),
+          child: FittedBox(
+            fit: BoxFit.cover,
+            child: Text(
+              'Введите ваш номер телефона',
+              style: TextStyle(fontSize: 18, color: Colors.black),
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
+          child: PhoneFieldModule(controller: textEditingController),
+        ),
+        Container(
             alignment: Alignment.center,
-            margin: const EdgeInsets.only(top: 0, left: 72, right: 72),
-            child: FittedBox(
-              fit: BoxFit.cover,
-              child: Text(
-                'Введите ваш номер телефона',
-                style: TextStyle(fontSize: 18, color: Colors.black),
-              ),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
-             child:PhoneFieldModule(controller: textEditingController),
-            // TextFormField(
-            //   autovalidate: true,
-            //
-            //   // validator: (String value){
-            //   //   bool isValid = value.length == 18;
-            //   //   if (isValid != isButtonEnabled) {
-            //   //     WidgetsBinding.instance.addPostFrameCallback((_) {
-            //   //       setState(() {
-            //   //         isButtonEnabled = value.length == 18;
-            //   //       });
-            //   //     });
-            //   //   }
-            //   // },
-            //   controller: textEditingController,
-            //
-            //   maxLengthEnforced: true,
-            //   inputFormatters: [
-            //     maskFormatter,
-            //   ],
-            //   keyboardType: TextInputType.phone,
-            //   decoration: const InputDecoration(
-            //     border: UnderlineInputBorder(),
-            //     hintStyle: const TextStyle(color: Colors.grey),
-            //     focusedBorder: const UnderlineInputBorder(
-            //         borderSide: BorderSide(color: Colors.black)),
-            //     labelText: '',
-            //   ),
-            // ),
-
-          ),
-          Container(
-              alignment: Alignment.center,
-              margin: const EdgeInsets.only(bottom: 56, left: 16, right: 16),
-              child: Column(
-                children: [
-                  MaterialButton(
-                    disabledColor: Colors.grey,
-                    child: Text(
-                      "Получить код",
-                      style: new TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.white70,
-                      ),
-                    ),
-                    onPressed: textEditingController.text.length == 18 ? () {
-                      setState(() {
-
-                      });
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  HomeScreen(
-                                      value: textEditingController.text)));
-                    }
-                        : null,
-                    height: 52,
-                    minWidth: double.infinity,
-                    color: Colors.black,
-                  ),
-                ],
-              )),
-          Container(
-            margin: const EdgeInsets.only(left: 16, right: 16),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            margin: const EdgeInsets.only(bottom: 56, left: 16, right: 16),
+            child: Column(
               children: [
-                SvgPicture.asset('assets/apple.svg'),
-                SvgPicture.asset('assets/vk.svg'),
-                SvgPicture.asset('assets/google.svg'),
+                MaterialButton(
+                  onPressed: _routeToHomeScreen,
+                  // disabledColor: Colors.grey,
+                  height: 52,
+                  child: Text(
+                    "Получить код",
+                    style: new TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.white70,
+                    ),
+                  ),
+                  color: Colors.black,
+                ),
               ],
-            ),
+            )),
+        Container(
+          margin: const EdgeInsets.only(left: 16, right: 16),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              SvgPicture.asset('assets/apple.svg'),
+              SvgPicture.asset('assets/vk.svg'),
+              SvgPicture.asset('assets/google.svg'),
+            ],
           ),
-        ]);
+        ),
+      ],
+    );
   }
 }

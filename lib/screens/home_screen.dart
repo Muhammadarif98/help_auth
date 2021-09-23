@@ -1,44 +1,30 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:help_auth/CallScreen.dart';
-// import 'package:pin_entry_text_field/pin_entry_text_field.dart';
-import 'main.dart';
 
-void main() => runApp(HomeScreen(value: '',));
-
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   final String value;
 
   HomeScreen({Key? key, required this.value}) : super(key: key);
 
   @override
-  _MyFormState createState() => _MyFormState(value: '');
-
-
-  @override
   Widget build(BuildContext context) {
-      return Scaffold(
-      body: HomeScreen(value: '',),
+    return Scaffold(
+      body: MyForm(value: value),
     );
   }
 }
 
 class MyForm extends StatefulWidget {
-  MyForm({
-    Key? key,
-  }) : super(key: key);
+  const MyForm({Key? key, required this.value}) : super(key: key);
+
+  final String value;
 
   @override
-  _MyFormState createState() => _MyFormState(value: '');
+  _MyFormState createState() => _MyFormState();
 }
 
-class _MyFormState extends State<HomeScreen> {
-  String value;
-
-  _MyFormState({Key? key, required this.value});
-
- late Timer _timer;
+class _MyFormState extends State<MyForm> {
+  late Timer _timer;
   int _start = 60;
 
   void startTimer() {
@@ -76,18 +62,18 @@ class _MyFormState extends State<HomeScreen> {
     var code = '1234';
     const appTitle = 'Авторизация';
     return new Scaffold(
-        appBar: AppBar(
-          iconTheme: IconThemeData(
-            color: Colors.black, //change your color here
-          ),
-          title: const Text(appTitle, style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.white,
-          centerTitle: true,
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
         ),
-        body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
+        title: const Text(appTitle, style: TextStyle(color: Colors.black)),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
           Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(top: 0, bottom: 16),
@@ -130,7 +116,6 @@ class _MyFormState extends State<HomeScreen> {
                       child: Text(
                         ' (изменить)',
                         style: TextStyle(fontSize: 14, color: Colors.grey),
-
                       ),
                     ),
                   ),
@@ -189,6 +174,8 @@ class _MyFormState extends State<HomeScreen> {
               ),
             ),
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }
