@@ -1,2 +1,2 @@
 ///App name
-const String appName = 'Authorization';
+const String appName = 'Авторизация';

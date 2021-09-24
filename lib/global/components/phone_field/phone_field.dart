@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../dialog_card.dart';
 import 'data/countries.dart';
 
@@ -32,7 +33,7 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
     isCollapsed: true,
     border: InputBorder.none,
     counterText: '',
-    hintText: 'Type your phone number',
+    hintText: '',
   );
 
   void setCountry(int index) {
@@ -52,6 +53,7 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       height: 60,
       margin: EdgeInsets.symmetric(vertical: 20),
@@ -112,11 +114,12 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
   }
 
   Widget _inputField() {
+
     return Expanded(
       child: TextFormField(
         style: widget.textStyle,
         maxLength: _selectedCountry['max_length'],
-        keyboardType: widget.keyboardType,
+        keyboardType: TextInputType.phone,
         controller: widget.controller,
         decoration: widget.decoration ?? _decoration,
       ),
