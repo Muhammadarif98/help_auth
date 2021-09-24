@@ -45,7 +45,7 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
   void initState() {
     _countryList = countries;
     _selectedCountry = _countryList.firstWhere(
-      (item) => item['code'] == (widget.initialCountryCode ?? 'US'),
+      (item) => item['code'] == (widget.initialCountryCode ?? 'RU'),
       orElse: () => _countryList.first,
     );
     super.initState();

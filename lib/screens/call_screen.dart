@@ -57,7 +57,7 @@ class _CallState extends State<CallForm> {
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(4)),
-                    border: Border.all(color: Colors.grey)),
+                    border: Border.all(color: const Color(0xffE6E6E6))),
                 margin: const EdgeInsets.only(
                     top: 40, bottom: 16, right: 16, left: 16),
                 child: Center(
@@ -81,7 +81,7 @@ class _CallState extends State<CallForm> {
                 height: 155,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(4)),
-                    border: Border.all(color: Colors.grey)),
+                    border: Border.all(color: const Color(0xffe6e6e6))),
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(
                     top: 0, bottom: 24, right: 16, left: 16),
@@ -106,7 +106,7 @@ class _CallState extends State<CallForm> {
                 height: 87,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(4)),
-                    border: Border.all(color: Colors.grey)),
+                    border: Border.all(color: const Color(0xffE6E6E6))),
                 alignment: Alignment.center,
                 margin: const EdgeInsets.only(
                     top: 0, bottom: 16, right: 16, left: 16),

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
 import 'call_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,7 +18,6 @@ class HomeScreen extends StatelessWidget {
 
 class MyForm extends StatefulWidget {
   const MyForm({Key? key, required this.value}) : super(key: key);
-
   final String value;
 
   @override
@@ -107,7 +105,7 @@ class _MyFormState extends State<MyForm> {
                 children: [
                   Container(
                     child: Text(
-                      "${widget.value}",
+                      " ${widget.value}",
                       style: TextStyle(fontSize: 14, color: Colors.blueAccent),
                     ),
                   ),
@@ -126,59 +124,56 @@ class _MyFormState extends State<MyForm> {
           ),
           Container(
             child: Padding(
-                padding: EdgeInsets.only(left : 66.0,right: 66),
-            child:PinCodeTextField(
+                padding: EdgeInsets.only(left: 66.0, right: 66),
+                child: PinCodeTextField(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
-
-              appContext: context,
-              length: 4,
-              enableActiveFill: false,
-              cursorColor: Colors.black,
-              keyboardType: TextInputType.number,
-              pinTheme: PinTheme(
-                fieldWidth: 40,
-
-                activeColor: Colors.black,
-                disabledColor: Colors.black,
-                inactiveColor: Colors.black,
-                selectedColor: Colors.black,
-              ),
-              onCompleted: (v) {showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Код смс"),
-                      content: Text('правильный код 1234'),
-                      actions: <Widget>[
-                        FlatButton(
-                            child: Text('Отмена'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            }),
-                        FlatButton(
-                          child: Text('Далее'),
-                          onPressed: '$v'.toString() == code
-                              ? () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                    const CallScreen()));
-                          }
-                              : null,
-                        )
-                      ],
-                    );
-                  });
-
-              },
-              onChanged: (String pin) {
-                 //end showDialog()
-              }, // end onSubmit
-            )
-          ),),
-
+                  appContext: context,
+                  length: 4,
+                  enableActiveFill: false,
+                  cursorColor: Colors.black,
+                  keyboardType: TextInputType.number,
+                  pinTheme: PinTheme(
+                    fieldWidth: 40,
+                    activeColor: Colors.black,
+                    disabledColor: Colors.black,
+                    inactiveColor: Colors.black,
+                    selectedColor: Colors.black,
+                  ),
+                  onCompleted: (v) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Код смс"),
+                            content: Text('правильный код 1234'),
+                            actions: <Widget>[
+                              FlatButton(
+                                  child: Text('Отмена'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  }),
+                              FlatButton(
+                                child: Text('Далее'),
+                                onPressed: '$v'.toString() == code
+                                    ? () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const CallScreen()));
+                                      }
+                                    : null,
+                              )
+                            ],
+                          );
+                        });
+                  },
+                  onChanged: (String pin) {
+                    //end showDialog()
+                  }, // end onSubmit
+                )),
+          ),
           Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(top: 32, bottom: 0),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-
+import 'global/components/phone_field/data/countries.dart';
 import 'global/components/phone_field/phone_field.dart';
 import 'screens/home_screen.dart';
 import 'global/constants.dart';
@@ -27,8 +26,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyCustomForm extends StatefulWidget {
-
   const MyCustomForm({Key? key}) : super(key: key);
+  get initialCountryCode => null;
 
   @override
   _MyCustomFormState createState() => _MyCustomFormState();
@@ -36,33 +35,45 @@ class MyCustomForm extends StatefulWidget {
 
 class _MyCustomFormState extends State<MyCustomForm> {
   bool isButtonEnabled = false;
-  late Map<String, dynamic> _selectedCountry;
   final textEditingController = TextEditingController();
+  late Map<String, dynamic> _selectedCountry;
+  late List<Map<String, dynamic>> _countryList;
+  late final String? initialCountryCode;
 
   void _routeToHomeScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScreen(value:  textEditingController.text),
+        builder: (context) => HomeScreen(
+            value: '+${_selectedCountry['dial_code']}' +
+                textEditingController.text),
       ),
     );
   }
 
+  void setCountry(int index) {
+    setState(() => _selectedCountry = _countryList[index]);
+    Navigator.pop(context);
+  }
+
   @override
   void initState() {
+    _countryList = countries;
+    _selectedCountry = _countryList.firstWhere(
+      (item) => item['code'] == (widget.initialCountryCode ?? 'RU'),
+    );
     super.initState();
     textEditingController.addListener(() {
       if (textEditingController.text.length == 10) {
         setState(() {});
-       }else if (textEditingController.text.length <= 18){
-         setState(() {});
+      } else if (textEditingController.text.length <= 18) {
+        setState(() {});
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,8 +92,8 @@ class _MyCustomFormState extends State<MyCustomForm> {
         Container(
           margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
           child: PhoneFieldModule(
-              controller: textEditingController,
-              keyboardType:  TextInputType.phone,
+            controller: textEditingController,
+            keyboardType: TextInputType.phone,
           ),
         ),
         Container(
@@ -91,9 +102,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
             child: Column(
               children: [
                 MaterialButton(
-                  onPressed: textEditingController.text.length==10? () {
-                    _routeToHomeScreen();
-                  } : null,
+                  onPressed: textEditingController.text.length == 10
+                      ? () {
+                          _routeToHomeScreen();
+                        }
+                      : null,
                   disabledColor: Colors.grey,
                   height: 52,
                   minWidth: double.infinity,
