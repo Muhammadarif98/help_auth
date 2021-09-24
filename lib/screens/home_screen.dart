@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
 import 'call_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -18,6 +19,7 @@ class HomeScreen extends StatelessWidget {
 
 class MyForm extends StatefulWidget {
   const MyForm({Key? key, required this.value}) : super(key: key);
+
   final String value;
 
   @override
@@ -105,7 +107,7 @@ class _MyFormState extends State<MyForm> {
                 children: [
                   Container(
                     child: Text(
-                      " ${widget.value}",
+                      "${widget.value}",
                       style: TextStyle(fontSize: 14, color: Colors.blueAccent),
                     ),
                   ),

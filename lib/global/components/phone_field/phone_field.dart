@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import '../dialog_card.dart';
 import 'data/countries.dart';
 
@@ -8,18 +7,20 @@ class PhoneFieldModule extends StatefulWidget {
   const PhoneFieldModule({
     this.initialCountryCode,
     this.keyboardType = TextInputType.number,
-    this.controller,
     this.decoration,
     this.textStyle,
     this.validator,
+    this.controller,
+   // required this.onChange,
   });
 
   final FormFieldValidator<String>? validator;
   final TextInputType? keyboardType;
-  final TextEditingController? controller;
   final String? initialCountryCode;
   final InputDecoration? decoration;
   final TextStyle? textStyle;
+  final TextEditingController? controller;
+  //final void Function(String number) onChange;
 
   @override
   _PhoneFieldModuleState createState() => _PhoneFieldModuleState();
@@ -53,7 +54,6 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       height: 60,
       margin: EdgeInsets.symmetric(vertical: 20),
@@ -114,7 +114,6 @@ class _PhoneFieldModuleState extends State<PhoneFieldModule> {
   }
 
   Widget _inputField() {
-
     return Expanded(
       child: TextFormField(
         style: widget.textStyle,

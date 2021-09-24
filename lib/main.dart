@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
 import 'global/components/phone_field/data/countries.dart';
 import 'global/components/phone_field/phone_field.dart';
 import 'screens/home_screen.dart';
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
 
 class MyCustomForm extends StatefulWidget {
   const MyCustomForm({Key? key}) : super(key: key);
+
   get initialCountryCode => null;
 
   @override
@@ -35,10 +38,10 @@ class MyCustomForm extends StatefulWidget {
 
 class _MyCustomFormState extends State<MyCustomForm> {
   bool isButtonEnabled = false;
-  final textEditingController = TextEditingController();
-  late Map<String, dynamic> _selectedCountry;
   late List<Map<String, dynamic>> _countryList;
-  late final String? initialCountryCode;
+  late Map<String, dynamic> _selectedCountry;
+
+  final textEditingController = TextEditingController();
 
   void _routeToHomeScreen() {
     Navigator.push(
@@ -61,6 +64,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
     _countryList = countries;
     _selectedCountry = _countryList.firstWhere(
       (item) => item['code'] == (widget.initialCountryCode ?? 'RU'),
+      orElse: () => _countryList.first,
     );
     super.initState();
     textEditingController.addListener(() {
