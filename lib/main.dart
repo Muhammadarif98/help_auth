@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MyCustomForm extends StatefulWidget {
-
   const MyCustomForm({Key? key}) : super(key: key);
 
   @override
@@ -43,7 +42,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => HomeScreen(value:  textEditingController.text),
+        builder: (context) => HomeScreen(value: textEditingController.text),
       ),
     );
   }
@@ -54,15 +53,14 @@ class _MyCustomFormState extends State<MyCustomForm> {
     textEditingController.addListener(() {
       if (textEditingController.text.length == 10) {
         setState(() {});
-       }else if (textEditingController.text.length <= 18){
-         setState(() {});
+      } else if (textEditingController.text.length <= 18) {
+        setState(() {});
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,8 +79,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
         Container(
           margin: const EdgeInsets.only(bottom: 24, left: 16, right: 16),
           child: PhoneFieldModule(
-              controller: textEditingController,
-              keyboardType:  TextInputType.phone,
+            onChange: (String number) {
+              print(number);
+            },
+            // controller: textEditingController,
+            keyboardType: TextInputType.phone,
           ),
         ),
         Container(
@@ -91,9 +92,11 @@ class _MyCustomFormState extends State<MyCustomForm> {
             child: Column(
               children: [
                 MaterialButton(
-                  onPressed: textEditingController.text.length==10? () {
-                    _routeToHomeScreen();
-                  } : null,
+                  onPressed: textEditingController.text.length == 10
+                      ? () {
+                          _routeToHomeScreen();
+                        }
+                      : null,
                   disabledColor: Colors.grey,
                   height: 52,
                   minWidth: double.infinity,

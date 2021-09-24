@@ -126,59 +126,55 @@ class _MyFormState extends State<MyForm> {
           ),
           Container(
             child: Padding(
-                padding: EdgeInsets.only(left : 66.0,right: 66),
-            child:PinCodeTextField(
-
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
-
-              appContext: context,
-              length: 4,
-              enableActiveFill: false,
-              cursorColor: Colors.black,
-              keyboardType: TextInputType.number,
-              pinTheme: PinTheme(
-                fieldWidth: 40,
-
-                activeColor: Colors.black,
-                disabledColor: Colors.black,
-                inactiveColor: Colors.black,
-                selectedColor: Colors.black,
-              ),
-              onCompleted: (v) {showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Text("Код смс"),
-                      content: Text('правильный код 1234'),
-                      actions: <Widget>[
-                        FlatButton(
-                            child: Text('Отмена'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            }),
-                        FlatButton(
-                          child: Text('Далее'),
-                          onPressed: '$v'.toString() == code
-                              ? () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                    const CallScreen()));
-                          }
-                              : null,
-                        )
-                      ],
-                    );
-                  });
-
-              },
-              onChanged: (String pin) {
-                 //end showDialog()
-              }, // end onSubmit
-            )
-          ),),
-
+                padding: EdgeInsets.only(left: 66.0, right: 66),
+                child: PinCodeTextField(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  appContext: context,
+                  length: 4,
+                  enableActiveFill: false,
+                  cursorColor: Colors.black,
+                  keyboardType: TextInputType.number,
+                  pinTheme: PinTheme(
+                    fieldWidth: 40,
+                    activeColor: Colors.black,
+                    disabledColor: Colors.black,
+                    inactiveColor: Colors.black,
+                    selectedColor: Colors.black,
+                  ),
+                  onCompleted: (v) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text("Код смс"),
+                            content: Text('правильный код 1234'),
+                            actions: <Widget>[
+                              FlatButton(
+                                  child: Text('Отмена'),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  }),
+                              FlatButton(
+                                child: Text('Далее'),
+                                onPressed: '$v'.toString() == code
+                                    ? () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const CallScreen()));
+                                      }
+                                    : null,
+                              )
+                            ],
+                          );
+                        });
+                  },
+                  onChanged: (String pin) {
+                    //end showDialog()
+                  }, // end onSubmit
+                )),
+          ),
           Container(
             alignment: Alignment.center,
             margin: const EdgeInsets.only(top: 32, bottom: 0),

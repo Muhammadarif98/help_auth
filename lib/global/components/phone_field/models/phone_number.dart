@@ -9,5 +9,5 @@ class PhoneNumber {
     required this.number,
   });
 
-  String get completeNumber => countryCode! + number!;
+  String get completeNumber => countryCode + number;
 }
